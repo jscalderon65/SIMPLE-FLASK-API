@@ -1,4 +1,7 @@
-version: 3.1
+networks:
+  default:
+    driver: bridge
+
 services:
   app:
     build:
@@ -6,6 +9,8 @@ services:
     restart: always
     ports:
       - 5000:5000
+    networks:
+      - default
 
   proxy:
     build: proxy
@@ -14,3 +19,5 @@ services:
       - 80:80
     depends_on:
       - app
+    networks:
+      - default
